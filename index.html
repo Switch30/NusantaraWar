@@ -1,0 +1,708 @@
+<html>
+	<head>
+		<style>
+			canvas{
+				background: url("indo.png");
+				background-size: 1920px 960px;
+			}
+			#SPButton{
+				font-size: 80px;
+				position: absolute;
+				top: 120px;
+				color: red;
+			}
+			#SPCMap{
+				background: url('SamudraPasai.png'); 
+			}
+			#SPMap{
+				position: absolute;
+				top: 10px;
+				left: 10px;
+			}
+			
+			
+			#DemakButton{
+				font-size: 80px;
+				position: absolute;
+				top: 620px;
+				color: red;
+				left: 620px;
+			}
+			#DemakCMap{
+				background: url('Demak.png'); 
+			}
+			#DemakMap{
+				position: absolute;
+				top: 630px;
+				left: 620px;
+			}
+			
+			#KutaiButton{
+				font-size: 80px;
+				position: absolute;
+				top: 350px;
+				color: red;
+				left: 900px;
+			}
+			#KutaiCMap{
+				background: url('Kutai.png')
+			}
+			#KutaiMap{
+				position: absolute;
+				top: 250px;
+				left: 900px;
+			}
+			
+			#SriwijayaButton{
+				font-size: 80px;
+				position: absolute;
+				top: 540px;
+				color: red;
+				left: 400px;
+			}
+			#SriwijayaCMap{
+				background: url('Sriwijaya.png');
+			}
+			#SriwijayaMap{
+				position: absolute;
+				top: 440px;
+				left: 120px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<canvas id="Indo" width="1900" height="930"></canvas>
+			<div class="SP">
+				<strong id="SPButton">+</strong>
+				<div id="SPMap" style="display:none">
+					<canvas id="SPCMap" width="480" height="267" style="border:1px solid #000000;"></canvas><br><br>
+					<table>
+						<tbody>
+							<tr>
+								<td id="troops1"></td>
+							</tr>
+							<tr>
+								<td>Target</td>
+								<td>:</td>
+								<td><select id="selectSP">
+										<option value="1">Kutai</option>
+										<option value="2">Sriwijaya</option>
+										<option value="3">Demak</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Infantry</td>
+								<td>:</td>
+								<td><input type="text"></td>
+							</tr>
+							<tr>
+								<td>Cavalry</td>
+								<td>:</td>
+								<td><input type="text"></td>
+							</tr>
+							<tr>
+								<td>Air</td>
+								<td>:</td>
+								<td><input type="text"></td>
+							</tr>
+							<tr>
+								<td><input type="submit" onclick="show_selectedSP()"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="Demak">
+				<strong id="DemakButton">+</strong>
+				<div id="DemakMap" style="display:none">
+					<canvas id="DemakCMap" width="480" height="167" style="border:1px solid #000000;"></canvas><br><br>
+					<table>
+						<tbody>
+							<tr>
+								<td id="troops2"></td>
+							</tr>
+							<tr>
+								<td>Target</td>
+								<td>:</td>
+								<td><select id="selectDemak">
+										<option value="1">Samudra Pasai</option>
+										<option value="2">Kutai</option>
+										<option value="3">Sriwijaya</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Infantry</td>
+								<td>:</td>
+								<td><input type="text"></td>
+							</tr>
+							<tr>
+								<td>Cavalry</td>
+								<td>:</td>
+								<td><input type="text"></td>
+							</tr>
+							<tr>
+								<td>Air</td>
+								<td>:</td>
+								<td><input type="text"></td>
+							</tr>
+							<tr>
+								<td><input type="submit" onclick="show_selectedDemak()"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="Kutai">
+				<strong id="KutaiButton">+</strong>
+				<div id="KutaiMap" style="display:none">
+					<canvas id="KutaiCMap" width="480" height="272" style="border:1px solid #000000;"></canvas><br><br>
+					<table>
+						<tbody>
+							<tr>
+								<td id="troops3"></td>
+							</tr>
+							<tr>
+								<td>Target</td>
+								<td>:</td>
+								<td><select id="selectKutai">
+										<option value="1">Samudra Pasai</option>
+										<option value="2">Sriwijaya</option>
+										<option value="3">Demak</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Infantry</td>
+								<td>:</td>
+								<td><input type="text"></td>
+							</tr>
+							<tr>
+								<td>Cavalry</td>
+								<td>:</td>
+								<td><input type="text"></td>
+							</tr>
+							<tr>
+								<td>Air</td>
+								<td>:</td>
+								<td><input type="text"></td>
+							</tr>
+							<tr>
+								<td><input type="submit" onclick="show_selectedKutai()"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="Sriwijaya">
+				<strong id="SriwijayaButton">+</strong>
+				<div id="SriwijayaMap" style="display:none">
+					<canvas id="SriwijayaCMap" width="480" height="240" style="border:1px solid #000000;"></canvas><br><br>
+					<table>
+						<tbody>
+							<tr>
+								<td id="troops4"></td>
+							</tr>
+							<tr>
+								<td>Target</td>
+								<td>:</td>
+								<td><select id="selectSriwijaya">
+										<option value="1">Samudra Pasai</option>
+										<option value="2">Kutai</option>
+										<option value="3">Demak</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Infantry</td>
+								<td>:</td>
+								<td><input type="text"></td>
+							</tr>
+							<tr>
+								<td>Cavalry</td>
+								<td>:</td>
+								<td><input type="text"></td>
+							</tr>
+							<tr>
+								<td>Air</td>
+								<td>:</td>
+								<td><input type="text"></td>
+							</tr>
+							<tr>
+								<td><input type="submit" onclick="show_selectedSriwijaya()"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script>
+			var canvas = document.getElementById("Indo");
+			var ctx = canvas.getContext("2d");
+			var posSPX = 10;
+			var posSPY = 120;
+			var posDemakX = 620;
+			var posDemakY = 620;
+			var posKutaiX = 900;
+			var posKutaiY = 350;
+			var posSriwijayaX = 400;
+			var posSriwijayaY = 540;
+			
+			var startDrawSP;
+			var startDrawD;
+			var startDrawK;
+			var startDrawS;
+			
+			document.getElementById("SPButton").onmouseover = function() {
+				show("SP")
+			};
+			
+			document.getElementById("DemakButton").onmouseover = function() {
+				show("Demak")
+			};
+			document.getElementById("KutaiButton").onmouseover = function() {
+				show("Kutai")
+			};
+			document.getElementById("SriwijayaButton").onmouseover = function() {
+				show("Sriwijaya")
+			};
+			function hide(){
+				document.getElementById("SPMap").style.display = "none";
+				document.getElementById("DemakMap").style.display = "none";
+				document.getElementById("KutaiMap").style.display = "none";
+				document.getElementById("SriwijayaMap").style.display = "none";
+			}
+			
+			function show(text){
+				hide();
+				if(text=="SP"){
+					document.getElementById("SPButton").style.display = "none";
+					document.getElementById("SPMap").style.display = "block";
+					document.getElementById("DemakButton").style.display = "block";
+					document.getElementById("KutaiButton").style.display = "block";
+					document.getElementById("SriwijayaButton").style.display = "block";
+				}
+				if(text=="Demak"){
+					document.getElementById("DemakButton").style.display = "none";
+					document.getElementById("DemakMap").style.display = "block";
+					document.getElementById("SPButton").style.display = "block";
+					document.getElementById("KutaiButton").style.display = "block";
+					document.getElementById("SriwijayaButton").style.display = "block";
+				}
+				if(text=="Kutai"){
+					document.getElementById("KutaiButton").style.display = "none";
+					document.getElementById("KutaiMap").style.display = "block";
+					document.getElementById("SPButton").style.display = "block";
+					document.getElementById("DemakButton").style.display = "block";
+					document.getElementById("SriwijayaButton").style.display = "block";
+				}
+				if(text=="Sriwijaya"){
+					document.getElementById("SriwijayaButton").style.display = "none";
+					document.getElementById("SriwijayaMap").style.display = "block";
+					document.getElementById("SPButton").style.display = "block";
+					document.getElementById("DemakButton").style.display = "block";
+					document.getElementById("KutaiButton").style.display = "block";
+				}
+			}
+			
+			/*=====================================================================================================*/
+
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("troops1").innerHTML = this.responseText;
+					document.getElementById("troops2").innerHTML = this.responseText;
+					document.getElementById("troops3").innerHTML = this.responseText;
+					document.getElementById("troops4").innerHTML = this.responseText;
+				}
+			};
+			xhttp.open("GET", "troops1.txt", true);
+			xhttp.send();
+
+			/*=====================================================================================================*/
+			
+			/*=====================================================================================================*/
+			function show_selectedSP() {
+				var selectorSP = document.getElementById('selectSP');
+				var valueSP = selectorSP[selectorSP.selectedIndex].value;
+				
+				if(valueSP==1){
+					startDrawSP = setInterval(drawLine1, 5);
+					document.getElementById("SPMap").style.display = "none";
+				}
+				if(valueSP==2){
+					startDrawSP = setInterval(drawLine2, 5);
+					document.getElementById("SPMap").style.display = "none";
+				}
+				if(valueSP==3){
+					startDrawSP = setInterval(drawLine3, 5);
+					document.getElementById("SPMap").style.display = "none";
+				}
+			}
+			
+			function drawLine1(){
+				var selisihx = Math.abs( posSPX -  posKutaiX);
+				if(selisihx < 10){
+					posSPX = posKutaiX;
+				}
+				var selisihy =  Math.abs( posSPY -  posKutaiY);
+				var langkahya = (selisihx > 0)?  selisihy / (selisihx / 10) : 10;
+				if(selisihy < 10){
+					posSPY = posKutaiY;
+				}
+         
+				if(posKutaiY > posSPY){
+					posSPY +=langkahya;
+				} 
+				else if(posKutaiY < posSPY){
+					posSPY -=langkahya;
+				}
+				ctx.beginPath();
+				ctx.arc(posSPX, posSPY, 3, 0, Math.PI*2);
+				ctx.fill();
+				ctx.closePath();
+				posSPX += 3;
+				posSPY -= 3;
+			}
+			
+			function drawLine2(){
+				var selisihx = Math.abs( posSPX -  posSriwijayaX);
+				if(selisihx < 10){
+					posSPX = posSriwijayaX;
+				}
+				var selisihy =  Math.abs( posSPY -  posSriwijayaY);
+				var langkahya = (selisihx > 0)?  selisihy / (selisihx / 10) : 10;
+				if(selisihy < 10){
+					posSPY = posSriwijayaY;
+				}
+         
+				if(posSriwijayaY > posSPY){
+					posSPY +=langkahya;
+				} 
+				else if(posSriwijayaY < posSPY){
+					posSPY -=langkahya;
+				}
+				ctx.beginPath();
+				ctx.arc(posSPX, posSPY, 3, 0, Math.PI*2);
+				ctx.fill();
+				ctx.closePath();
+				posSPX += 3;
+				posSPY -= 1;
+			}
+			
+			function drawLine3(){
+				var selisihx = Math.abs( posSPX -  posDemakX);
+				if(selisihx < 10){
+					posSPX = posDemakX;
+				}
+				var selisihy =  Math.abs( posSPY -  posDemakY);
+				var langkahya = (selisihx > 0)?  selisihy / (selisihx / 10) : 10;
+				if(selisihy < 10){
+					posSPY = posDemakY;
+				}
+         
+				if(posDemakY > posSPY){
+					posSPY +=langkahya;
+				} 
+				else if(posDemakY < posSPY){
+					posSPY -=langkahya;
+				}
+				ctx.beginPath();
+				ctx.arc(posSPX, posSPY, 3, 0, Math.PI*2);
+				ctx.fill();
+				ctx.closePath();
+				posSPX += 3;
+				posSPY -= 3;
+			}
+			/*=====================================================================================================*/
+			
+			
+			/*=====================================================================================================*/
+			function show_selectedDemak() {
+				var selectorD = document.getElementById('selectDemak');
+				var valueD = selectorD[selectorD.selectedIndex].value;
+				
+				if(valueD==1){
+					startDrawD = setInterval(drawLineD1, 5);
+					document.getElementById("DemakMap").style.display = "none";
+				}
+				if(valueD==2){
+					startDrawD = setInterval(drawLineD2, 5);
+					document.getElementById("DemakMap").style.display = "none";
+				}
+				if(valueD==3){
+					startDrawD = setInterval(drawLineD3, 5);
+					document.getElementById("DemakMap").style.display = "none";
+				}
+			}
+			
+			function drawLineD1(){
+				var selisihx = Math.abs( posDemakX -  posSPX);
+				if(selisihx < 10){
+					posDemakX = posSPX;
+				}
+				var selisihy =  Math.abs( posDemakY - posSPY);
+				var langkahya = (selisihx > 0)?  selisihy / (selisihx / 10) : 10;
+				if(selisihy < 10){
+					posDemakY = posSPY;
+				}
+         
+				if(posSPY > posDemakY){
+					posDemakY +=langkahya;
+				} 
+				else if(posSPY < posDemakY){
+					posDemakY -=langkahya;
+				}
+				ctx.beginPath();
+				ctx.arc(posDemakX, posDemakY, 3, 0, Math.PI*2);
+				ctx.fill();
+				ctx.closePath();
+				posDemakX -= 3;
+				posDemakY += 1;
+			}
+			
+			function drawLineD2(){
+				var selisihx = Math.abs( posDemakX -  posKutaiX);
+				if(selisihx < 10){
+					posDemakX = posKutaiX;
+				}
+				var selisihy =  Math.abs( posDemakY - posKutaiY);
+				var langkahya = (selisihx > 0)?  selisihy / (selisihx / 10) : 10;
+				if(selisihy < 10){
+					posDemakY = posKutaiY;
+				}
+         
+				if(posKutaiY > posDemakY){
+					posDemakY +=langkahya;
+				} 
+				else if(posKutaiY < posDemakY){
+					posDemakY -=langkahya;
+				}
+				ctx.beginPath();
+				ctx.arc(posDemakX, posDemakY, 3, 0, Math.PI*2);
+				ctx.fill();
+				ctx.closePath();
+				posDemakX += 5;
+				posDemakY += 1;
+			}
+			
+			function drawLineD3(){
+				var selisihx = Math.abs( posDemakX -  posSriwijayaX);
+				if(selisihx < 10){
+					posDemakX = posSriwijayaX;
+				}
+				var selisihy =  Math.abs( posDemakY - posSriwijayaY);
+				var langkahya = (selisihx > 0)?  selisihy / (selisihx / 10) : 10;
+				if(selisihy < 10){
+					posDemakY = posSriwijayaY;
+				}
+         
+				if(posSriwijayaY > posDemakY){
+					posDemakY +=langkahya;
+				} 
+				else if(posSriwijayaY < posDemakY){
+					posDemakY -=langkahya;
+				}
+				ctx.beginPath();
+				ctx.arc(posDemakX, posDemakY, 3, 0, Math.PI*2);
+				ctx.fill();
+				ctx.closePath();
+				posDemakX -= 3;
+				posDemakY += 1;
+			}
+			/*=====================================================================================================*/
+			
+			/*=====================================================================================================*/
+			function show_selectedKutai() {
+				var selectorK = document.getElementById('selectKutai');
+				var valueK = selectorK[selectorK.selectedIndex].value;
+				
+				if(valueK==1){
+					startDrawK = setInterval(drawLineK1, 5);
+					document.getElementById("KutaiMap").style.display = "none";
+				}
+				if(valueK==2){
+					startDrawK = setInterval(drawLineK2, 5);
+					document.getElementById("KutaiMap").style.display = "none";
+				}
+				if(valueK==3){
+					startDrawK = setInterval(drawLineK3, 5);
+					document.getElementById("KutaiMap").style.display = "none";
+				}
+			}
+			
+			function drawLineK1(){
+				var selisihx = Math.abs( posKutaiX -  posSPX);
+				if(selisihx < 10){
+					posKutaiX = posSPX;
+				}
+				var selisihy =  Math.abs( posKutaiY - posSPY);
+				var langkahya = (selisihx > 0)?  selisihy / (selisihx / 10) : 10;
+				if(selisihy < 10){
+					posKutaiY = posSPY;
+				}
+         
+				if(posSPY > posKutaiY){
+					posKutaiY +=langkahya;
+				} 
+				else if(posSPY < posKutaiY){
+					posKutaiY -=langkahya;
+				}
+				ctx.beginPath();
+				ctx.arc(posKutaiX, posKutaiY, 3, 0, Math.PI*2);
+				ctx.fill();
+				ctx.closePath();
+				posKutaiX -= 3;
+				posKutaiY += 1;
+			}
+			
+			function drawLineK2(){
+				var selisihx = Math.abs( posKutaiX -  posSriwijayaX);
+				if(selisihx < 10){
+					posKutaiX = posSriwijayaX;
+				}
+				var selisihy =  Math.abs( posKutaiY - posSriwijayaY);
+				var langkahya = (selisihx > 0)?  selisihy / (selisihx / 10) : 10;
+				if(selisihy < 10){
+					posKutaiY = posSriwijayaY;
+				}
+         
+				if(posSriwijayaY > posKutaiY){
+					posKutaiY +=langkahya;
+				} 
+				else if(posSriwijayaY < posKutaiY){
+					posKutaiY -=langkahya;
+				}
+				ctx.beginPath();
+				ctx.arc(posKutaiX, posKutaiY, 3, 0, Math.PI*2);
+				ctx.fill();
+				ctx.closePath();
+				posKutaiX -= 3;
+				posKutaiY -= 1;
+			}
+			
+			function drawLineK3(){
+				var selisihx = Math.abs( posKutaiX -  posDemakX);
+				if(selisihx < 10){
+					posKutaiX = posDemakX;
+				}
+				var selisihy =  Math.abs( posKutaiY - posDemakY);
+				var langkahya = (selisihx > 0)?  selisihy / (selisihx / 10) : 10;
+				if(selisihy < 10){
+					posKutaiY = posDemakY;
+				}
+         
+				if(posDemakY > posKutaiY){
+					posKutaiY +=langkahya;
+				} 
+				else if(posDemakY < posKutaiY){
+					posKutaiY -=langkahya;
+				}
+				ctx.beginPath();
+				ctx.arc(posKutaiX, posKutaiY, 3, 0, Math.PI*2);
+				ctx.fill();
+				ctx.closePath();
+				posKutaiX -= 2;
+				posKutaiY -= 2;
+			}
+			/*=====================================================================================================*/
+			
+			/*=====================================================================================================*/
+			function show_selectedSriwijaya() {
+				var selectorS = document.getElementById('selectSriwijaya');
+				var valueS = selectorS[selectorS.selectedIndex].value;
+				
+				if(valueS==1){
+					startDrawS = setInterval(drawLineS1, 5);
+					document.getElementById("SriwijayaMap").style.display = "none";
+				}
+				if(valueS==2){
+					startDrawS = setInterval(drawLineS2, 5);
+					document.getElementById("SriwijayaMap").style.display = "none";
+				}
+				if(valueS==3){
+					startDrawS = setInterval(drawLineS3, 5);
+					document.getElementById("SriwijayaMap").style.display = "none";
+				}
+			}
+			
+			function drawLineS1(){
+				var selisihx = Math.abs( posSriwijayaX -  posSPX);
+				if(selisihx < 10){
+					posSriwijayaX = posSPX;
+				}
+				var selisihy =  Math.abs( posSriwijayaY - posSPY);
+				var langkahya = (selisihx > 0)?  selisihy / (selisihx / 10) : 10;
+				if(selisihy < 10){
+					posSriwijayaY = posSPY;
+				}
+         
+				if(posSPY > posSriwijayaY){
+					posSriwijayaY +=langkahya;
+				} 
+				else if(posSPY < posSriwijayaY){
+					posSriwijayaY -=langkahya;
+				}
+				ctx.beginPath();
+				ctx.arc(posSriwijayaX, posSriwijayaY, 3, 0, Math.PI*2);
+				ctx.fill();
+				ctx.closePath();
+				posSriwijayaX -= 3;
+				posSriwijayaY += 1;
+			}
+			
+			function drawLineS2(){
+				var selisihx = Math.abs( posSriwijayaX -  posKutaiX);
+				if(selisihx < 10){
+					posSriwijayaX = posKutaiX;
+				}
+				var selisihy =  Math.abs( posSriwijayaY - posKutaiY);
+				var langkahya = (selisihx > 0)?  selisihy / (selisihx / 10) : 10;
+				if(selisihy < 10){
+					posSriwijayaY = posKutaiY;
+				}
+         
+				if(posKutaiY > posSriwijayaY){
+					posSriwijayaY +=langkahya;
+				} 
+				else if(posKutaiY < posSriwijayaY){
+					posSriwijayaY -=langkahya;
+				}
+				ctx.beginPath();
+				ctx.arc(posSriwijayaX, posSriwijayaY, 3, 0, Math.PI*2);
+				ctx.fill();
+				ctx.closePath();
+				posSriwijayaX += 2;
+				posSriwijayaY += 2;
+			}
+			
+			function drawLineS3(){
+				var selisihx = Math.abs( posSriwijayaX -  posDemakX);
+				if(selisihx < 10){
+					posSriwijayaX = posDemakX;
+				}
+				var selisihy =  Math.abs( posSriwijayaY - posDemakY);
+				var langkahya = (selisihx > 0)?  selisihy / (selisihx / 10) : 10;
+				if(selisihy < 10){
+					posSriwijayaY = posDemakY;
+				}
+         
+				if(posDemakY > posSriwijayaY){
+					posSriwijayaY +=langkahya;
+				} 
+				else if(posDemakY < posSriwijayaY){
+					posSriwijayaY -=langkahya;
+				}
+				ctx.beginPath();
+				ctx.arc(posSriwijayaX, posSriwijayaY, 3, 0, Math.PI*2);
+				ctx.fill();
+				ctx.closePath();
+				posSriwijayaX += 3;
+				posSriwijayaY -= 1;
+			}
+			/*=====================================================================================================*/
+		</script>
+	</body>
+</html>
